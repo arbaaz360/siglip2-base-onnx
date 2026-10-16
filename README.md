@@ -53,8 +53,8 @@ The text tower is mostly its vocabulary: 256,000 rows of 768, 393 MB of the
 |---|---|---|
 | `text.onnx` | 565 MB | 369 MB |
 | Text vector vs PyTorch, worst of ten sentences | 0.99999 | 0.99928 |
-| Nine photo queries with known answers: same first hit as v1 | | 9 of 9, top five unchanged |
-| 25 queries over 228 pictures: same first hit as v1 | | 23 of 25 (PyTorch float32 also 23 of 25) |
+| Nine ground-truth photo queries, ranked against the image vectors a v1 app stored: same first hit as v1 | | 9 of 9, top five identical in order |
+| 25 queries over 236 pictures: same first hit as v1 | | 23 of 25 (the two changes were ties within 0.0004; PyTorch float32: 24 of 25) |
 | Text tower, CPU memory after load (ONNX Runtime) | 1,144 MB | 555 MB |
 
 ## Licence and changes
