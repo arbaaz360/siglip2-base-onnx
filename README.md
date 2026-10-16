@@ -18,6 +18,20 @@ The files are attached to releases. This repository holds no code.
 Image vectors from all three agree to cosine ≥ 0.99999, so an index built with
 one works with the others.
 
+### Which `vision.onnx`
+
+The two vision files differ only in arithmetic, so a consumer can pick per
+device and still share one index:
+
+| Runs on | Use | Why |
+|---|---|---|
+| Core ML (macOS, iOS) | v3 | Core ML runs a float16 graph in float16 throughout and drifts (cosine 0.983); v3 computes in float32 |
+| a GPU with fast float16 (DirectML, CUDA) | v2 | float16 arithmetic: 168–174 img/s against v3's 100–101 on an RTX 5060 Ti (batch 8) |
+| a CPU | either | ONNX Runtime's CPU provider computes in float32 whichever you give it (10.4 and 11.1 img/s) |
+
+An app can list both, v2's `vision.onnx` for Windows and v3's for macOS with
+the same `text.onnx` and `tokenizer.model`, and keep one index across them.
+
 ## Files (v3)
 
 | File | Bytes | SHA-256 | What |
